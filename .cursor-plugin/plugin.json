@@ -1,0 +1,25 @@
+{
+  "name": "secbrain",
+  "displayName": "Second Brain",
+  "description": "Obsidian second-brain skills, the session rule, and the obsidian-secondbrain MCP server.",
+  "version": "0.1.0",
+  "author": {
+    "name": "Alexander"
+  },
+  "keywords": ["obsidian", "second-brain", "secbrain", "notes", "mcp"],
+  "variables": {
+    "type": "object",
+    "properties": {
+      "OBSIDIAN_PYTHON": {
+        "type": "string",
+        "title": "Python for obsidian-secondbrain",
+        "description": "Optional. Overrides ~/Documents/obsidian-mcp/.venv. Windows: <checkout>/.venv/Scripts/python.exe. Elsewhere: <checkout>/.venv/bin/python."
+      },
+      "OBSIDIAN_VAULT": {
+        "type": "string",
+        "title": "Obsidian vault",
+        "description": "Optional. Absolute path to the vault. When empty, a SecondBrain directory in the workspace is used if one exists."
+      }
+    }
+  }
+}

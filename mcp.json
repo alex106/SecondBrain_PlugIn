@@ -1,0 +1,15 @@
+{
+  "mcpServers": {
+    "obsidian-secondbrain": {
+      "command": "/usr/bin/bash",
+      "args": [
+        "-c",
+        "exec \"$HOME/.cursor/plugins/local/secbrain/scripts/launch_mcp.py\""
+      ],
+      "env": {
+        "OBSIDIAN_PYTHON": "${OBSIDIAN_PYTHON}",
+        "OBSIDIAN_VAULT": "${OBSIDIAN_VAULT}"
+      }
+    }
+  }
+}

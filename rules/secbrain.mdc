@@ -1,0 +1,40 @@
+---
+description: Search the Obsidian second-brain vault before acting on the first request of a session.
+alwaysApply: true
+---
+
+## Start every session by reading the vault
+
+Before you act on the user's first request in a session, search the vault --
+`search_notes` on the key terms of the request, `find_notes` on the obvious
+titles, `vault_info` if you do not yet know the folder taxonomy. Read what
+comes back *before* you open a file, run a command, or answer. What was decided
+and why, what is still open and what was already tried live in there;
+re-deriving them throws away the work that put them there.
+
+Do this once per session, on the first request, whatever the request is. If
+nothing relevant comes back, say so in one line and carry on -- an empty vault
+is an answer, not a blocker.
+
+## Second brain (obsidian-secondbrain MCP)
+
+This project has a local Obsidian vault wired up over MCP. The server only
+moves bytes on disk -- it never summarises. The thinking is yours.
+
+- **Capture** as you go: `log_entry` for a fact or half-formed idea.
+- **Compact** happens on its own: `beforeSubmitPrompt`/`afterAgentResponse`
+  hooks buffer each turn, and `preCompact`/`sessionEnd` file that buffer into
+  the inbox, undistilled. Still call `capture_session` with a written summary
+  when a session decided something worth keeping -- a hook runs outside the
+  model and cannot summarise.
+- **Inject** happens on its own too: a `sessionStart` hook adds a short vault
+  digest (undistilled backlog count, recent log tail) as additional context.
+  It is a passive index read, not a search -- the rule above still applies
+  once you know what the request actually is.
+- **Distil** when asked: `distill_queue` -> `create_concept_note` (one idea per
+  note, title phrased as a claim, linked with [[wikilinks]]) -> `mark_distilled`.
+- **Review**: `vault_health`, `related_notes`, `resurface_notes`.
+
+Never edit a raw capture -- distil it instead. Never write an unlinked note:
+`find_notes` or `search_notes` first, then link. Run `vault_info` once to learn
+the folder taxonomy; it is configurable data, not fixed.
